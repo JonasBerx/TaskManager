@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks UWUWIES</title>
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/table.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+
+</head>
+<body>
+
+<nav class="menu">
+    <input id ="menu__toggle" type="checkbox" class='menu__toggle'/>
+    <label for="menu__toggle" class="menu__toggle-label">
+        <svg preserveAspectRatio='xMinYMin' viewBox='0 0 24 24'>
+            <path d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z' />
+        </svg>
+        <svg preserveAspectRatio='xMinYMin' viewBox='0 0 24 24'>
+            <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+        </svg>
+    </label>
+    <ol class='menu__content'>
+        <li class="menu-item"><a href="/">Home</a></li>
+        <li class="menu-item"><a href="/tasks">Task Overview</a></li>
+        <li class="menu-item"><a href="/new">Add Task</a></li>
+    </ol>
+</nav>
+
+<div th:if="${#lists.isEmpty(tasks)}">
+
+    <p style="text-align: center; color: white">No more tasks to do</p>
+    <br>
+    <img style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;" src="https://www.dailydot.com/wp-content/uploads/2019/10/uwu.jpg" alt="noice" class="img-thumbnail" width="304" height="236">
+
+</div>
+<section th:unless="${#lists.isEmpty(tasks)}"><br>
+    <h1 style="text-align: center; color: white">Your current tasks</h1>
+    <br>
+
+    <div class="container-fluid">
+        <div class="container"  >
+            <div class="row" >
+                <div class="col-sm-4" th:each="task : ${tasks}">
+                    <div class="card text-center">
+                        <div class="title">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <h2 th:text="'Name: ' + *{task.name}"></h2>
+                        </div>
+                        <div class="price">
+                            <p></p>
+                        </div>
+                        <div class="option">
+                            <ul>
+                                <li th:text="'Description: ' +${task.description}"></li>
+                                <li th:text="${#temporals.format(task.deadline, 'dd/MM/yyyy HH:mm a')}"></li>
+                                <li th:text="${task.subTasks.size() + ' subtasks' }"> <i class="fa fa-check" aria-hidden="true"></i> 20 Email Address </li>
+                            </ul>
+                        </div>
+                        <a th:href="@{/delete/{task.id}}">Finish task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+
+</html>
