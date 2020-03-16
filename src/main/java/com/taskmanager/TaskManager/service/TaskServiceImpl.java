@@ -43,8 +43,8 @@ public class TaskServiceImpl implements TaskService{
         repository.editTask(id, name, description, deadline);
     }
 
-//    @Override
-//    public void deleteTask(String id) {
-//        repository.delete(id);
-//    }
+    @Override
+    public void deleteTask(String id) {
+        repository.delete(id);
+    }
 }

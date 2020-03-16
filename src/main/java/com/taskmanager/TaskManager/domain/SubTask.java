@@ -1,7 +1,11 @@
 package com.taskmanager.TaskManager.domain;
 
-public class SubTask {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class SubTask {
+    @Id
     private String name;
     private String description;
 

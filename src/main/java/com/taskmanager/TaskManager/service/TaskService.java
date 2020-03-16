@@ -18,5 +18,5 @@ public interface TaskService {
 
     void editTask(String id, String name, String description, LocalDateTime deadline);
 
-//    void deleteTask(String id);
+    void deleteTask(String id);
 }

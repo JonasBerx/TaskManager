@@ -2,18 +2,23 @@ package com.taskmanager.TaskManager.domain;
 
 import org.apache.tomcat.jni.Local;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Entity
 public class Task {
+    @Id
     private String id;
     private String name;
     private String description;
     private LocalDateTime deadline;
+    @OneToMany
     private List<SubTask> subTasks;
 
 

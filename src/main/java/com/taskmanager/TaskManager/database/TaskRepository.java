@@ -16,8 +16,8 @@ public class TaskRepository {
     public TaskRepository() {
         tasks = new ArrayList<>();
         tasks.add(new Task("1", "2", "3", LocalDateTime.of(2020,12,12,12,12)));
-        tasks.add(new Task("2", "2", "3", LocalDateTime.of(2020,12,12,12,12)));
-        tasks.add(new Task("3", "2", "3", LocalDateTime.of(2020,12,12,12,12)));
+//        tasks.add(new Task("2", "2", "3", LocalDateTime.of(2020,12,12,12,12)));
+//        tasks.add(new Task("3", "2", "3", LocalDateTime.of(2020,12,12,12,12)));
 
     }
 
@@ -62,12 +62,7 @@ public class TaskRepository {
     }
 
     public void delete(String id) {
-        for (Task t: tasks
-             ) {
-            if (t.getId().equals(id)) {
-                tasks.remove(t);
-            }
-        }
+        tasks.removeIf(t -> t.getId().equals(id));
 
     }
 }

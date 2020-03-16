@@ -36,13 +36,17 @@ public class TaskController {
     @PostMapping("/taskAdd")
     public String addTask(@ModelAttribute @Valid TaskDTO taskDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            System.out.println(taskDTO.getId());
+            System.out.println(taskDTO.getName());
+            System.out.println(taskDTO.getDeadline());
+            System.out.println(taskDTO.getDescription());
             return "addTask";
         }
         taskService.addTask(taskDTO);
         return "redirect:/tasks";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/tasks/new")
     public String addTask(Model model) {
         model.addAttribute("task", new TaskDTO());
         return "addTask";
@@ -85,9 +89,9 @@ public class TaskController {
         return "redirect:/tasks/" + parentID;
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteTask(@PathVariable String id) {
-//        taskService.deleteTask(id);
-//        return "redirect:/tasks";
-//    }
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable String id) {
+        taskService.deleteTask(id);
+        return "redirect:/tasks";
+    }
 }

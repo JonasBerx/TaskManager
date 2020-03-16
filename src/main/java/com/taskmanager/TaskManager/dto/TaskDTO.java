@@ -1,5 +1,6 @@
 package com.taskmanager.TaskManager.dto;
 
+import com.taskmanager.TaskManager.DateTimeFormatter;
 import com.taskmanager.TaskManager.domain.SubTask;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -38,6 +39,9 @@ public class TaskDTO {
     }
 
     public void setId(String id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Leeg");
+        }
         this.id = id;
     }
 
@@ -46,6 +50,9 @@ public class TaskDTO {
     };
 
     public void setName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Leeg");
+        }
         this.name = name;
     };
 
@@ -54,6 +61,9 @@ public class TaskDTO {
     };
 
     public void setDescription(String description) {
+        if (description == null) {
+            throw new IllegalArgumentException("Leeg");
+        }
         this.description = description;
     };
 
@@ -62,10 +72,16 @@ public class TaskDTO {
     };
 
     public void setDeadline(LocalDateTime deadline) {
+        if (deadline == null) {
+            throw new IllegalArgumentException("Leeg");
+        }
         this.deadline = deadline;
     };
 
     public void setSubTasks(List<SubTask> subTasks) {
+        if (subTasks == null) {
+            throw new IllegalArgumentException("Leeg");
+        }
         this.subTasks = subTasks;
     }
 }
