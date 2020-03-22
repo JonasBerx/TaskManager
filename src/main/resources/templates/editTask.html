@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Add Task</title>
+    <title>Edit Task</title>
     <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -22,7 +23,7 @@
 </nav>
 
 <main>
-    <form action="/tasks" method="post" th:object="${task}" style="width: 70%; margin-left: 15%; margin-right: 15%">
+    <form th:action="${'/tasks/edit/' + task.id}" method="post" th:object="${task}" style="margin-left: 15%; margin-right: 15%;">
         <div class="form-group">
             <label for="name">Name:</label>
             <input th:field="*{name}" type="text" class="form-control">
