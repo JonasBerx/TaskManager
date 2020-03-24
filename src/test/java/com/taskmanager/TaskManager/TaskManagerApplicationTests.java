@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = Task.class)
 class TaskManagerApplicationTests {
 
 	private TaskService taskService = new TaskService();
