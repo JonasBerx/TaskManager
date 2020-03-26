@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskDTO {
     private long id;
@@ -48,7 +49,7 @@ public class TaskDTO {
 
     public String deadlineToString(){
         DateFormatter formatter =new DateFormatter();
-        return formatter.print(deadline, null);
+        return formatter.print(deadline, Locale.forLanguageTag("nl-BE"));
     }
 
     public void setId(long id){

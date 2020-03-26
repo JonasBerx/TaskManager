@@ -22,18 +22,26 @@ public class SubTask {
     private boolean completed = false;
 
     public SubTask(String name, String description) {
-        this.name = name;
-        this.description = description;
+        setName(name);
+        setDescription(description);
     }
 
     public SubTask(){}
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Name must not be empty");
+        }
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description != null && !description.trim().isEmpty()) {
+            this.description = description;
+        } else {
+            throw new IllegalArgumentException("Description must not be empty");
+        }
     }
 
     public long getId() {

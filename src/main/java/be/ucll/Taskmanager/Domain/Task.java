@@ -29,9 +29,9 @@ public class Task {
     private List<SubTask> subtasks;
 
     public Task(String name, String description,LocalDateTime deadline) {
-        this.name = name;
-        this.description = description;
-        this.deadline = deadline;
+        setName(name);
+        setDescription(description);
+        setDeadline(deadline);
         subtasks = new ArrayList<>();
     }
 
@@ -40,15 +40,27 @@ public class Task {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("Name must not be empty");
+        }
     }
 
     public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+        if (deadline != null) {
+            this.deadline = deadline;
+        } else {
+            throw new IllegalArgumentException("Deadline must not be empty");
+        }
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description != null && !description.trim().isEmpty()) {
+            this.description = description;
+        } else {
+            throw new IllegalArgumentException("Description must not be empty");
+        }
     }
 
     public long getId() {
@@ -82,11 +94,15 @@ public class Task {
 
     public void addSubTask(SubTask t){
         long id = 1;
-        if (this.subtasks.size()>0){
-            id = this.subtasks.get(subtasks.size()-1).getId()+1;
+        if (t != null) {
+            if (this.subtasks.size() > 0) {
+                id = this.subtasks.get(subtasks.size() - 1).getId() + 1;
+            }
+            t.setId(id);
+            this.subtasks.add(t);
+        } else {
+            throw new IllegalArgumentException("Subtask is empty");
         }
-        t.setId(id);
-        this.subtasks.add(t);
     }
 
     public List<SubTask> getSubtasks(){
@@ -102,6 +118,10 @@ public class Task {
     }
 
     public void setSubtasks(List<SubTask> subtasks){
-        this.subtasks = subtasks;
+        if (subtasks != null) {
+            this.subtasks = subtasks;
+        } else {
+            throw new IllegalArgumentException("This list is empty");
+        }
     }
 }
