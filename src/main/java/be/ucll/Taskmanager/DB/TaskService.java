@@ -12,11 +12,16 @@ import java.util.Optional;
 
 @Service
 public class TaskService {
-    @Autowired
+
     TaskRepository taskRepository;
-    @Autowired
+
     SubTaskRepository subTaskRepository;
 
+    @Autowired
+    public TaskService(TaskRepository taskRepository, SubTaskRepository subTaskRepository) {
+        this.taskRepository = taskRepository;
+        this.subTaskRepository = subTaskRepository;
+    }
 
     public Task get(long id) {
         Optional<Task> optional = taskRepository.findById(id);
@@ -39,6 +44,30 @@ public class TaskService {
     public void delete(long id) {
         taskRepository.deleteById(id);
         subTaskRepository.removeAllByTaskid(id);
+    }
+
+    public TaskDTO addTask(TaskDTO dto) {
+        Task t = new Task();
+        t.setId(dto.getId());
+        t.setName(dto.getName());
+        t.setDescription(dto.getDescription());
+        t.setDeadline(dto.getDeadline());
+        t.setSubtasks(dto.getSubtasks());
+        t.setCompleted(dto.isCompleted());
+        t = taskRepository.save(t);
+        return convert(t);
+    }
+
+    private TaskDTO convert(Task t) {
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setId(t.getId());
+        taskDTO.setName(t.getName());
+        taskDTO.setDeadline(t.getDeadline());
+        taskDTO.setDescription(t.getDescription());
+        taskDTO.setSubtasks(t.getSubtasks());
+        taskDTO.setCompleted(t.isCompleted());
+
+        return taskDTO;
     }
 
     public void update(TaskDTO dto) {
