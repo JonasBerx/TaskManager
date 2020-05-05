@@ -1,10 +1,12 @@
 package be.ucll.Taskmanager.DB;
 
+import be.ucll.Taskmanager.Domain.SubTask;
 import be.ucll.Taskmanager.Domain.Task;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,15 +15,15 @@ public class TaskServiceInMemory implements TaskServiceInterface {
     private Map<Long,Task> tasks;
 
     public TaskServiceInMemory(){
-//        this.tasks = new HashMap<>();
-//        this.addTask("task1", "test task", LocalDateTime.now());
-//        this.addTask("task2","test taks 2", LocalDateTime.now());
-//        this.addTask("task3","test taks 3", LocalDateTime.now());
-//        this.tasks.get(1).addSubTask(new SubTask("subtask 1/1","subtask of main task 1"));
-//        this.tasks.get(1).addSubTask(new SubTask("subtask 1/2","subtask of main task 1"));
-//        this.tasks.get(1).addSubTask(new SubTask("subtask 1/3","subtask of main task 1"));
-//        this.tasks.get(2).addSubTask(new SubTask("subtask 2/1","subtask of main task 1"));
-//        this.tasks.get(3).addSubTask(new SubTask("subtask 3/1","subtask of main task 1"));
+        this.tasks = new HashMap<>();
+        this.addTask("task1", "test task", LocalDateTime.now());
+        this.addTask("task2","test taks 2", LocalDateTime.now());
+        this.addTask("task3","test taks 3", LocalDateTime.now());
+        this.tasks.get(Long.valueOf(1)).addSubTask(new SubTask("subtask 1/1","subtask of main task 1"));
+        this.tasks.get(Long.valueOf(1)).addSubTask(new SubTask("subtask 1/2","subtask of main task 1"));
+        this.tasks.get(Long.valueOf(1)).addSubTask(new SubTask("subtask 1/3","subtask of main task 1"));
+        this.tasks.get(Long.valueOf(2)).addSubTask(new SubTask("subtask 2/1","subtask of main task 1"));
+        this.tasks.get(Long.valueOf(3)).addSubTask(new SubTask("subtask 3/1","subtask of main task 1"));
     }
 
     public void addTask(Task task){

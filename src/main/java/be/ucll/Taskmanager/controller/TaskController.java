@@ -114,30 +114,18 @@ public class TaskController {
     public String addSubTask(@ModelAttribute SubTask subTask, @PathVariable("id") long id){
         subTask.setTaskid(id);
         subTaskService.add(createDTOfromSubtask(subTask));
-        System.out.println("subtask taskid:" + subTaskService.getAll().get(0).getTaskid());
         return "redirect:/tasks";
     }
 
-    @PostMapping("/tasks/sub/remove/{subtaskid}")
-    public String removeSubTask(@PathVariable("subtaskid") long subtaskid){
-        subTaskService.delete(subtaskid);
+
+
+    @PostMapping("/tasks/{id}/sub/edit/{subtaskid}")
+    public String editSubTask(@ModelAttribute SubTask subtask,@PathVariable("subtaskid")long subtaskid, @PathVariable("id") long taskid){
+        subtask.setTaskid(taskid);
+        subtask.setId(subtaskid);
+        subTaskService.update(createDTOfromSubtask(subtask));
         return "redirect:/tasks";
     }
-
-//    @GetMapping("/tasks/{id}/sub/edit/{subtaskid}")
-//    public String goToEdit(@PathVariable("subtaskid") long subtaskid,Model model,@PathVariable("id") long id){
-//        model.addAttribute("subtask",subTaskService.get(subtaskid));
-//        model.addAttribute("task",taskService.get(id));
-//        return "editSubTask";
-//    }
-
-//    @PostMapping("/tasks/{id}/sub/edit/{subtaskid}")
-//    public String editSubTask(@ModelAttribute SubTask subtask,@PathVariable("subtaskid")long subtaskid, @PathVariable("id") long taskid){
-//        subtask.setTaskid(taskid);
-//        subtask.setId(subtaskid);
-//        subTaskService.update(createDTOfromSubtask(subtask));
-//        return "redirect:/tasks";
-//    }
 
     private SubTaskDTO createDTOfromSubtask(SubTask subTask) {
         SubTaskDTO dto = new SubTaskDTO();

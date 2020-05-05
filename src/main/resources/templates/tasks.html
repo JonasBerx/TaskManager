@@ -7,14 +7,21 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <a class="navbar-brand" href="/tasks/">Tasks</a>
-    <a class="navbar-brand" href="/tasks/new">Add Task</a>
+    <a class="navbar-brand" href="/"><div th:text="#{home}"></div></a>
+    <a class="navbar-brand" href="/tasks/"><div th:text="#{tasks}"></div></a>
+    <a class="navbar-brand" href="/tasks/new"><div th:text="#{addTask}"></div></a>
+    <span th:text="#{lang.change}"></span>:
+    <select id="locales">
+        <option></option>
+        <option value="en" th:text="#{lang.eng}"></option>
+        <option value="nl" th:text="#{lang.nl}"></option>
+        <option value="fr" th:text="#{lang.fr}"></option>
+    </select>
 </nav>
 
         <main>
             <div th:if="${#lists.isEmpty(tasks)}">
-                <p style="text-align: center">No more tasks to do</p>
+                <p th:text="#{noTask}" style="text-align: center">No more tasks to do</p>
             </div>
 
             <div th:unless="${#lists.isEmpty(tasks)}">
@@ -22,11 +29,11 @@
                     <li>
                         <div class="item">
                             <div class="util">
-                                <a class="btn btn-outline-secondary" th:href="${'/tasks/edit/' + task.id}">
+                                <a th:text="#{edit}" class="btn btn-outline-secondary" th:href="${'/tasks/edit/' + task.id}">
                                       Edit</a>
-                                <a class="btn btn-outline-secondary" href="">
+                                <a th:text="#{del}" class="btn btn-outline-secondary" href="">
                                     Delete</a>
-                                <a class="btn btn-outline-secondary" th:href="${'/tasks/' + task.id + '/sub/create'}">
+                                <a th:text="#{add}" class="btn btn-outline-secondary" th:href="${'/tasks/' + task.id + '/sub/create'}">
                                     Add subtask</a>
                             </div>
                             <div>
@@ -39,12 +46,6 @@
                     </li>
 
                     <ul class="subtask" th:each="subtask : ${subtasks.get(task.id)}" style="list-style-type: none">
-                        <div class="util-sub">
-                            <a class="btn btn-outline-secondary" href="">
-                                Edit subtask</a>
-                            <a  class="btn btn-outline-secondary" href="">
-                                Delete subtask</a>
-                        </div>
                         <div>
                             <li th:text="'Name: ' + ${subtask.name}"></li>
                             <li th:text="'Description: ' + ${subtask.description}"></li>
@@ -55,4 +56,8 @@
             </div>
         </main>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript" src="/language.js">
+</script>
 </html>
